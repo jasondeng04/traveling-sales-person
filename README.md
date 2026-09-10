@@ -72,22 +72,6 @@ With a precomputed per-cluster distance matrix this is constant-time. The result
 
 **Takeaway.** Three findings drive the result. First, clustering quality is the foundation — unclustered SA fails outright, while any decent decomposition unlocks 91%+ improvement from either meta-heuristic. Second, GLS wins end-to-end on throughput, not solution quality: it is 7× faster per cluster, so within a fixed wall-clock budget it completes more optimization rounds across all 1,000 clusters than ACO can, and that compounds into a ~5% shorter global tour. Third, the greedy boundary-city stitch is now the binding constraint — many inter-cluster edges are longer than necessary, and running SA on centroids for cluster ordering only partially fixes this.
 
-## Repository structure
-
-```
-TSP/
-├── TSP_Project.ipynb      # Full pipeline: clustering, SA/GLS/ACO, stitching, plots
-├── TSP_Presentation.pptx  # Slide deck summarizing method and results
-└── README.md
-```
-
-## Running it
-
-1. Clone the repo: `git clone https://github.com/jasondeng04/TSP.git`
-2. Install dependencies: `pip install numpy pandas scikit-learn matplotlib`
-3. Place the city coordinate file at `[path/filename]` — see [dataset source].
-4. Open `TSP_Project.ipynb` and run all cells top to bottom.
-
 Key parameters at the top of the notebook: cluster count `k`, SA cooling rate, GLS penalty weight $\lambda$, and ACO's $\alpha$, $\beta$, $\rho$.
 
 ## Limitations and next steps
